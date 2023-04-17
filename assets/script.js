@@ -9,9 +9,8 @@ var searchHistory = document.querySelector("#searchHistory")
 var testing = "http://api.openweathermap.org/geo/1.0/direct?q=austin&limit=1&appid=31fbadef98a417ef6f0e39d36c133d27" 
  
 var city = '';
-var btnSuccess = document.querySelector(".btn-success");
-
-console.log(btnSuccess.nextElementSibling)
+var btnSuccess = document.querySelector(".btn");
+ 
  
 
 btnSuccess.addEventListener("click", successBtnListner)
@@ -27,10 +26,13 @@ function successBtnListner(event){
 
     var apiSearch = "http://api.openweathermap.org/geo/1.0/direct?q=" + newCityName + "&limit=1&appid=31fbadef98a417ef6f0e39d36c133d27"
 
-    cityLookup(apiSearch);
     searchHist(cityName);
+    cityLookup(apiSearch);
+ 
 
 }
+
+
 
 function cityLookup(apiString){
 
@@ -50,14 +52,28 @@ fetch(apiString)
     return response.json();
   })
   .then(function (data) {   
+    console.log(data)
+    console.log(typeof data.list[0].weather[0].main)
+
 
     for (var i = 0; i<=5; i++){
+        var weatherIcon = data.list[i].weather[0].main
+        var icon = document.querySelector('#icon' + i)
         var temp = document.querySelector('#temp' + i)
         var wind = document.querySelector('#wind' + i)
         var humidity = document.querySelector('#humidity' + i)
         temp.textContent = "Temp:  " + data.list[i].main.temp + "°F"
         wind.textContent = "Wind: " + data.list[i].wind.speed + "MPH";
         humidity.textContent = "Humidity: " + data.list[i].main.humidity + "%";
+
+        if (weatherIcon === "Clouds"){
+             icon.classList.add("fa-solid", "fa-cloud"); 
+        } else if (weatherIcon === "Rain") {
+            icon.classList.add("fa-solid", "fa-cloud-showers-heavy"); 
+        } else {
+            icon.classList.add("fa-regular", "fa-sun"); 
+        }
+
 
     }
   
@@ -83,19 +99,46 @@ function searchHist(cityName){
     var li = document.createElement("li");
     var button = document.createElement("button");
 
+    var name = cityName; 
+
     button.classList.add("btns"); 
-    button.textContent = '' + cityName;
+    button.classList.add("btn-secondary")
+    button.style.width = "310px"
+    button.style.border = "solid black"
+    li.style.padding = "5px"
+    li.style.marginRight = "45px"
+    button.type = "button";
+    li.textContent = "";
+    li.style.listStyleType = "none";
+    button.textContent = '' + cityName; 
  
     li.appendChild(button); 
     searchHistory.appendChild(li);
-    // button.addEventListener("click", btnsEventListner);
+    button.addEventListener("click", historyButtonListner); 
+}
+
+
+
+function historyButtonListner(event){ 
+    var inputEl = event.target.innerText;  
+
+
+    cityName = inputEl;
+
+    titleName.textContent = cityName + " " + dayjs().format("(M/DD/YYYY)")
+    var newCityName = cityName.replace(/\s/g, '') 
+
+    var apiSearch = "http://api.openweathermap.org/geo/1.0/direct?q=" + newCityName + "&limit=1&appid=31fbadef98a417ef6f0e39d36c133d27"
+ 
+    cityLookup(apiSearch); 
+
 }
  
  
 
 todaysDates()
 
- 
+
 
 
 
