@@ -56,7 +56,7 @@ fetch(apiString)
     console.log(typeof data.list[0].weather[0].main)
 
 
-    for (var i = 0; i<=5; i++){
+    for (var i = 0; i<=40; i+=8){
         var weatherIcon = data.list[i].weather[0].main
         var icon = document.querySelector('#icon' + i)
         var temp = document.querySelector('#temp' + i)
@@ -87,7 +87,7 @@ fetch(apiString)
 function todaysDates(){
      
    
-    for (var i = 0; i<=5; i++){
+    for (var i = 0; i<=32; i+=8){
         var dates = document.querySelector("#date" + i); 
 dates.textContent = dayjs().day(i).format("M/DD/YYYY")
 
