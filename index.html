@@ -25,24 +25,26 @@
     <div class="container-fluid width=100%">
         <div class="row ">
           <div class="col-sm-3">
-            <label for="cityInput" class="col-form-label col-form-label-lg">Search for a city</label>
+            <label for="cityInput" id="labelTitle" class="col-form-label col-form-label-lg">Search for a city</label><br>
+            <p>City name, state code and country code divided by comma. Or just City and state.</p>
             <div class="col-sm-10 ">
               <input type="text" class="form-control form-control-lg" id="cityInput" placeholder="Please enter City"> 
               <div class="d-grid gap-2">
                 <button class="btn btn-secondary my-3" type="button" id="search">Search</button> 
               </div>
+              <div id="error"></div>
             </div> 
           </div>
           <div class="col-sm-9 border border-dark"> 
             <div class="fs-1 cityName" id="date0" >City Name & Date</div>
             <br>
-            <div class="fs-3" id="icon0"></div>
+            <div class="fs-3" id="icon3"></div>
             <br>
-            <div class="fs-3" id="temp0">Temperature:</div>
+            <div class="fs-3" id="temp3">Temperature:</div>
             <br>
-            <div class="fs-3" id="wind0">Wind:</div>
+            <div class="fs-3" id="wind3">Wind:</div>
             <br>
-            <div class="fs-3" id="humidity0">Humidity</div> 
+            <div class="fs-3" id="humidity3">Humidity</div> 
             <br>
           </div>
         </div>
@@ -52,6 +54,7 @@
                 <div class="d-grid gap-2"></div>
                 <ul class="d-flex justify-content-center flex-wrap" id="searchHistory">
                 </ul> 
+                <button class="btn btn-secondary my-3" type="button" id="clear">Clear History</button> 
             </div>
           </div>
           <div class="col-sm-9">
@@ -59,57 +62,57 @@
             <div class="container-fluid d-flex p-2 bd-highlight justify-content-around">
             <div class="card p-3 mb-2 bg-secondary text-white">
                 <div class="card-body">
-                    <div class="fs-2" id="date8" >Date1</div>
+                    <div class="fs-2" id="date1" >Date1</div>
                     <br>
-                    <div class="fs-3" id="icon8" ></div>
+                    <div class="fs-3" id="icon11" ></div>
                     <br>
-                    <div class="fs-3" id="temp8">Temperature:</div>
+                    <div class="fs-3" id="temp11">Temperature:</div>
                     <br>
-                    <div class="fs-3" id="wind8">Wind:</div>
+                    <div class="fs-3" id="wind11">Wind:</div>
                     <br>
-                    <div class="fs-3" id="humidity8">Humidity:</div> 
-                    <br>
-                </div>
-              </div>
-              <div class="card p-3 mb-2 bg-secondary text-white">
-                <div class="card-body">
-                    <div class="fs-2" id="date16" >Date2</div>
-                    <br>
-                    <div class="fs-3" id="icon16" ></div>
-                    <br>
-                    <div class="fs-3" id="temp16">Temperature:</div>
-                    <br>
-                    <div class="fs-3" id="wind16">Wind:</div>
-                    <br>
-                    <div class="fs-3" id="humidity16">Humidity:</div> 
+                    <div class="fs-3" id="humidity11">Humidity:</div> 
                     <br>
                 </div>
               </div>
               <div class="card p-3 mb-2 bg-secondary text-white">
                 <div class="card-body">
-                    <div class="fs-2" id="date24" >Date3</div>
+                    <div class="fs-2" id="date2" >Date2</div>
                     <br>
-                    <div class="fs-3" id="icon24" ></div>
+                    <div class="fs-3" id="icon19" ></div>
                     <br>
-                    <div class="fs-3" id="temp24">Temperature:</div>
+                    <div class="fs-3" id="temp19">Temperature:</div>
                     <br>
-                    <div class="fs-3" id="wind24">Wind:</div>
+                    <div class="fs-3" id="wind19">Wind:</div>
                     <br>
-                    <div class="fs-3" id="humidity24">Humidity:</div> 
+                    <div class="fs-3" id="humidity19">Humidity:</div> 
+                    <br>
+                </div>
+              </div>
+              <div class="card p-3 mb-2 bg-secondary text-white">
+                <div class="card-body">
+                    <div class="fs-2" id="date3" >Date3</div>
+                    <br>
+                    <div class="fs-3" id="icon27" ></div>
+                    <br>
+                    <div class="fs-3" id="temp27">Temperature:</div>
+                    <br>
+                    <div class="fs-3" id="wind27">Wind:</div>
+                    <br>
+                    <div class="fs-3" id="humidity27">Humidity:</div> 
                     <br>
                 </div>
               </div>
               <div class="card p-3 mb-2 bg-secondary text-white">
                 <div class="card-body ">
-                    <div class="fs-2" id="date32" >Date4</div>
+                    <div class="fs-2" id="date4" >Date4</div>
                     <br>
-                    <div class="fs-3" id="icon32" ></div>
+                    <div class="fs-3" id="icon35" ></div>
                     <br>
-                    <div class="fs-3" id="temp32">Temperature:</div>
+                    <div class="fs-3" id="temp35">Temperature:</div>
                     <br>
-                    <div class="fs-3" id="wind32">Wind:</div>
+                    <div class="fs-3" id="wind35">Wind:</div>
                     <br>
-                    <div class="fs-3" id="humidity32">Humidity:</div> 
+                    <div class="fs-3" id="humidity35">Humidity:</div> 
                     <br>
                 </div>
               </div>
