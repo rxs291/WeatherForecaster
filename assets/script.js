@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     newCityName = newCityName.replace(" ", "_");
 
     var apiSearch =
-      "http://api.openweathermap.org/geo/1.0/direct?q=" +
+      "https://api.openweathermap.org/geo/1.0/direct?q=" +
       newCityName +
       "&limit=1&appid=31fbadef98a417ef6f0e39d36c133d27";
 
