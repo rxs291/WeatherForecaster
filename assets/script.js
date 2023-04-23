@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var name = cityName;
 
     if (cities.includes(name)) {
-      console.log("this works");
+        return
     } else {
       cities.push(name);
       localStorage.setItem("Cities", JSON.stringify(cities));
@@ -166,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function clearHistory() {
     localStorage.clear();
+    cities = [];
     searchHistory.innerHTML = "";
   }
   ////////////THIS FUNCTION RETURNS THE CURRENT DAYS WEATHER, ALMOST LEFT IT OUT COMPETELY, SORRY.
