@@ -1,8 +1,8 @@
-# WeatherForecaster #PasswordGenerator
+#WeatherForecaster
 
 A forecsaster that meets all acceptance criteria. 
 
-![FinalProject](./assets/Screenshot%202023-04-17%20094531.png)
+![FinalProject](./assets/Capture.JPG)
 
 deployed website link:
 https://rxs291.github.io/WeatherForecaster/
