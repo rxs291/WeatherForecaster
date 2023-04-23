@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var newCityName = cityName.replace(/\s/g, "");
 
     var apiSearch =
-      "http://api.openweathermap.org/geo/1.0/direct?q=" +
+      "https://api.openweathermap.org/geo/1.0/direct?q=" +
       newCityName +
       "&limit=1&appid=31fbadef98a417ef6f0e39d36c133d27";
 
@@ -174,15 +174,14 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(function (response) {
         return response.json();
       })
-      .then(function (data) {
-        console.log(data);
+      .then(function (data) { 
+
         error.textContent = "";
         var cityName = data.name;
         titleName.textContent = cityName + " " + dayjs().format("(M/DD/YYYY)");
         searchHist(cityName);
 
-        var weatherIcon = data.weather[0].main;
-        console.log(data.weather[0].main);
+        var weatherIcon = data.weather[0].main; 
         var icon = document.querySelector("#icon");
         var temp = document.querySelector("#temp");
         var wind = document.querySelector("#wind");
