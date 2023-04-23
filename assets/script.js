@@ -4,10 +4,10 @@ document.addEventListener("DOMContentLoaded", function () {
   var lat = "";
   var titleName = document.querySelector(".cityName");
   var searchHistory = document.querySelector("#searchHistory");
-  var error = document.querySelector("#error"); 
+  var error = document.querySelector("#error");
   var btnSuccess = document.querySelector(".btn");
   var btnClear = document.querySelector("#clear");
-  var cities = []; 
+  var cities = [];
 
   btnSuccess.addEventListener("click", searchBtnListner);
   btnClear.addEventListener("click", clearHistory);
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var inputEl = event.target;
     cityName = inputEl.parentElement.previousElementSibling.value;
     var newCityName = cityName.trim();
-    newCityName = newCityName.replace(" ", "_")
+    newCityName = newCityName.replace(" ", "_");
 
     var apiSearch =
       "http://api.openweathermap.org/geo/1.0/direct?q=" +
@@ -38,31 +38,34 @@ document.addEventListener("DOMContentLoaded", function () {
         if (data.length === 0) {
           error.textContent = "*City Not Found";
           throw new Error("JSON response empty.");
-        }  
+        } else {
+        }
 
         lon = data[0].lon;
         lat = data[0].lat;
 
-        var newApiSearch =
+        var fiveDayForcastAPI =
           "http://api.openweathermap.org/data/2.5/forecast?lat=" +
           lat +
           "&lon=" +
           lon +
           "&limit=1&appid=31fbadef98a417ef6f0e39d36c133d27&units=imperial";
 
-        fetch(newApiSearch)
+        var currentWeatherAPI =
+          "https://api.openweathermap.org/data/2.5/weather?lat=" +
+          lat +
+          "&lon=" +
+          lon +
+          "&limit=1&appid=31fbadef98a417ef6f0e39d36c133d27&units=imperial";
+
+        currentWeather(currentWeatherAPI);
+
+        fetch(fiveDayForcastAPI)
           .then(function (response) {
             return response.json();
           })
           .then(function (data) {
-            error.textContent = "";
-            var cityName = data.city.name;
-            titleName.textContent =
-              cityName + " " + dayjs().format("(M/DD/YYYY)");
-
-            searchHist(cityName);
-
-            for (var i = 3; i <= 35; i += 8) {
+            for (var i = 0; i <= 32; i += 8) {
               var weatherIcon = data.list[i].weather[0].main;
               var icon = document.querySelector("#icon" + i);
               var temp = document.querySelector("#temp" + i);
@@ -85,9 +88,9 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  //////THIS FUNCTION ADDS DATES TO THE CARD CONTAINERS 
+  //////THIS FUNCTION ADDS DATES TO THE CARD CONTAINERS
   function todaysDates() {
-    for (var i = 0; i <= 4; i++) {
+    for (var i = 0; i <= 5; i++) {
       var dates = document.querySelector("#date" + i);
       dates.textContent = dayjs().add(i, "d").format("M/DD/YYYY");
     }
@@ -135,8 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-
-  ////THIS FUNCTION CREATES A BUTTON AND ATTACHES TO THE HISTORY CONTAINER FOR EVERY CITY NAME THAT IS PASSED TO IT. 
+  ////THIS FUNCTION CREATES A BUTTON AND ATTACHES TO THE HISTORY CONTAINER FOR EVERY CITY NAME THAT IS PASSED TO IT.
   function renderHistory(name) {
     var cityName = name;
     var li = document.createElement("li");
@@ -158,14 +160,44 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", historyButtonListner);
   }
 
-
   ///THESE FUNCTIONS RENDER ON PAGE LOAD, ONE TO ESTABLISH THE DATES AND THE OTHER TO PULL FROM LOCALSTORAGE AND RENDER PREVIOUS SEARCH HISTORY
   todaysDates();
   init();
 
-  function clearHistory(){
-    localStorage.clear()
+  function clearHistory() {
+    localStorage.clear();
     searchHistory.innerHTML = "";
+  }
+  ////////////THIS FUNCTION RETURNS THE CURRENT DAYS WEATHER, ALMOST LEFT IT OUT COMPETELY, SORRY.
+  function currentWeather(current) {
+    fetch(current)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        error.textContent = "";
+        var cityName = data.name;
+        titleName.textContent = cityName + " " + dayjs().format("(M/DD/YYYY)");
+        searchHist(cityName);
 
+        var weatherIcon = data.weather[0].main;
+        console.log(data.weather[0].main);
+        var icon = document.querySelector("#icon");
+        var temp = document.querySelector("#temp");
+        var wind = document.querySelector("#wind");
+        var humidity = document.querySelector("#humidity");
+        temp.textContent = "Temp:  " + data.main.temp + "°F";
+        wind.textContent = "Wind: " + data.wind.speed + "MPH";
+        humidity.textContent = "Humidity: " + data.main.humidity + "%";
+
+        if (weatherIcon === "Clouds") {
+          icon.classList.add("fa-solid", "fa-cloud");
+        } else if (weatherIcon === "Rain") {
+          icon.classList.add("fa-solid", "fa-cloud-showers-heavy");
+        } else {
+          icon.classList.add("fa-regular", "fa-sun");
+        }
+      });
   }
 });
