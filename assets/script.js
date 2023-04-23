@@ -4,8 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var lat = "";
   var titleName = document.querySelector(".cityName");
   var searchHistory = document.querySelector("#searchHistory");
-  var error = document.querySelector("#error");
-  var city = "";
+  var error = document.querySelector("#error"); 
   var btnSuccess = document.querySelector(".btn");
   var btnClear = document.querySelector("#clear");
   var cities = []; 
@@ -39,9 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (data.length === 0) {
           error.textContent = "*City Not Found";
           throw new Error("JSON response empty.");
-        } else {
-
-        }
+        }  
 
         lon = data[0].lon;
         lat = data[0].lat;
